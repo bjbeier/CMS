@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Simple clean styles for the list view */
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --accent: #0ea5e9;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --card: #1e293b;
+                --text: #f8fafc;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        header {
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+        }
+
+        .blog-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+        }
+
+        /* Styles required/used by the loader's default HTML output */
+        .blog-entry {
+            background-color: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .blog-entry:hover {
+            transform: translateY(-4px);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .blog-title {
+            margin: 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .blog-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .blog-title a:hover {
+            color: var(--accent);
+        }
+
+        .blog-summary {
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .blog-summary {
+                color: #94a3b8;
+            }
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .admin-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: var(--bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .admin-link:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Welcome to My Blog</h1>
+        <p>Powered by Simple HTML CMS</p>
+    </header>
+
+    <div id="blog-container" class="blog-list" data-blog-list="blog-container">
+        <!-- Posts will load here -->
+    </div>
+
+    <a href="admin.html" class="admin-link">Manage Blog</a>
+
+    <script src="blog-loader.js"></script>
+</body>
+
+</html>
