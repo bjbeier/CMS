@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en" class="scroll-smooth">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Insights | BJ Beier</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.googletagmanager.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://placehold.co; connect-src 'self' https://www.google-analytics.com https://unpkg.com;">
+
+
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+
+
+    <!-- Tailwind CSS + Typography Plugin (Loaded ONCE) -->
+
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+
+    <script src="js/tailwind.config.js"></script>
+
+
+
+    <style>
+        .glass-card {
+
+            background: rgba(30, 41, 59, 0.7);
+
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        }
+    </style>
+
+</head>
+
+<body class="bg-brand-dark text-slate-300 font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+
+
+    <!-- Navigation -->
+
+    <header class="bg-brand-dark/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+            <a href="index.html"
+                class="font-mono text-xl font-bold text-white tracking-tighter hover:text-brand-accent transition-colors">
+
+                <span class="text-brand-accent">&lt;</span>BJ.Beier<span class="text-brand-accent">/&gt;</span>
+
+            </a>
+
+            <h1 class="text-3xl font-extrabold text-white hidden sm:block">Digital Insights</h1>
+
+            <a href="index.html" class="text-slate-400 hover:text-brand-accent transition-colors flex items-center">
+
+                <i data-lucide="home" class="w-5 h-5 mr-1"></i> Back to Main
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- Blog Post List -->
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+
+        <h2 class="text-4xl font-extrabold text-white mb-10 text-center">Latest Articles</h2>
+
+        <!-- Dynamic Blog Container -->
+        <div id="blog-list-container" class="space-y-12">
+            <!-- Posts will be injected here by blog-loader.js -->
+        </div>
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer class="text-center py-8 border-t border-slate-800 text-slate-500 text-sm">
+
+        <p>&copy; 2025 BJ Beier. Insights by BJ.</p>
+
+    </footer>
+
+
+
+    <!-- Scripts -->
+
+    <script src="js/app.js"></script>
+    <script src="blog-loader.js"></script>
+    <!-- Auto-initialize loader for list view -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPosts('blog-list-container');
+        });
+    </script>
+</body>
+
+</html>

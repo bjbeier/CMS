@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BJ Beier | Leader & Tech Enthusiast</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.googletagmanager.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://placehold.co; connect-src 'self' https://www.google-analytics.com https://unpkg.com;">
+    <meta name="description" content="Personal site of BJ Beier - Leader, Tech Enthusiast, and Problem Solver.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Fonts: Inter (Clean Sans) & Fira Code (Tech/Monospace) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (No build step required) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config for Custom Colors -->
+    <!-- Tailwind Config for Custom Colors -->
+    <script src="js/tailwind.config.js"></script>
+
+    <style>
+        /* Custom Utilities */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .terminal-window {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ensure the full description is visible for Network items */
+        .network-description {
+            line-height: 1.5;
+            /* Default line height */
+            /* Removed line-clamp-2 to show full text */
+        }
+
+        /* ROBUST GRADIENT FIX */
+        .gradient-text-fix {
+            display: inline-block;
+            /* Forces layout calculation */
+            color: #38bdf8;
+            /* Fallback: Solid blue if clip fails */
+        }
+
+        @supports (-webkit-background-clip: text) or (background-clip: text) {
+            .gradient-text-fix {
+                background-image: linear-gradient(to right, #38bdf8, #2563eb);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-brand-dark text-slate-300 font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-mono text-xl font-bold text-white tracking-tighter">
+                        <span class="text-brand-accent">&lt;</span>BJ.Beier<span class="text-brand-accent">/&gt;</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about"
+                            class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#stack"
+                            class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">The
+                            Stack</a>
+                        <a href="#projects"
+                            class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="BJB-blog.html"
+                            class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Insights
+                            (Blog)</a>
+                        <a href="#network"
+                            class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">The
+                            Network</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-btn" type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="hidden md:hidden bg-brand-dark border-b border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about"
+                    class="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#stack"
+                    class="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">The
+                    Stack</a>
+                <a href="#projects"
+                    class="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="BJB-blog.html"
+                    class="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Insights
+                    (Blog)</a>
+                <a href="#network"
+                    class="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">The
+                    Network</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+
+                <!-- Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left mb-12 lg:mb-0">
+                    <!-- Status Badge -->
+                    <div
+                        class="inline-flex items-center px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-accent/10 text-brand-accent text-xs font-mono mb-6">
+                        <span class="relative flex h-2 w-2 mr-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                        </span>
+                        System Status: Online
+                    </div>
+
+                    <!-- Headshot Mobile (Visible only on small screens) -->
+                    <div class="lg:hidden mb-6 flex justify-center">
+                        <img src="images/bjbeier.jpg" alt="BJ Beier"
+                            class="w-32 h-32 rounded-full border-4 border-slate-700 shadow-xl object-cover">
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6">
+                        Hi, I'm BJ.<br>
+                        <span class="gradient-text-fix">
+                            Wonder. Learn. Lead.
+                        </span>
+                    </h1>
+
+                    <div class="h-8 mb-8">
+                        <span id="typewriter"
+                            class="font-mono text-xl sm:text-2xl text-brand-terminal typing-cursor"></span>
+                    </div>
+
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                        Currently serving as <strong>Chief Information Officer</strong> at Guardian Savings Bank.
+                        Bridging the gap between enterprise finance strategy and the sheer joy of tinkering with
+                        Linux, Docker, and Home Automation.
+                    </p>
+
+                    <!-- Mobile Terminal Window (Visible on Mobile, Hidden on Desktop) -->
+                    <div class="block lg:hidden text-left mb-10 mx-auto max-w-md">
+                        <div
+                            class="terminal-window rounded-lg bg-[#1e1e1e] border border-slate-700 overflow-hidden relative z-10">
+                            <div class="flex items-center px-4 py-2 bg-[#2d2d2d] border-b border-slate-700">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="flex-1 text-center text-xs font-mono text-slate-400">bj@mobile-term:~</div>
+                            </div>
+                            <div class="p-4 font-mono text-xs sm:text-sm">
+                                <div class="mb-2">
+                                    <span class="text-green-400">bj@mobile:~$</span> neofetch
+                                </div>
+                                <div class="flex gap-2 text-slate-300">
+                                    <div class="text-brand-accent font-bold">
+                                        <pre class="leading-none text-[6px] sm:text-[8px] text-blue-400">
+.----------.
+|   _.._   |
+|  / \/ \  |
+| '------' |
+'----------'
+</pre>
+                                    </div>
+                                    <div class="pl-1">
+                                        <p><span class="text-brand-accent">Role:</span> Leader / Tinkerer</p>
+                                        <p><span class="text-brand-accent">Uptime:</span> 20+ Years</p>
+                                        <p><span class="text-brand-accent">Interests:</span> Family, Tech, Rock Music
+                                        </p>
+                                        <p><span class="text-brand-accent">Status:</span> Geek Mode</p>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="text-green-400">bj@mobile:~$</span> <span
+                                        class="animate-pulse">_</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                        <a href="BJB-blog.html"
+                            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 w-full sm:w-auto">
+                            Read My Thoughts
+                            <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="https://linkedin.com/in/bjbeier" target="_blank" rel="noopener noreferrer"
+                                class="p-3 border border-slate-600 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://x.com/bjbeier" target="_blank" rel="noopener noreferrer"
+                                class="p-3 border border-slate-600 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+                                title="X (Formerly Twitter)">
+                                <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+                                    <path
+                                        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:contact@bjbeier.com"
+                                class="p-3 border border-slate-600 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+                                title="Email Me">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual/Image Desktop (Hidden on Mobile) -->
+                <div class="lg:col-span-5 relative hidden lg:block">
+                    <!-- Decorative blob -->
+                    <div
+                        class="absolute -top-10 -right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob">
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -left-10 w-72 h-72 bg-brand-terminal rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000">
+                    </div>
+
+                    <!-- Headshot Desktop Floating -->
+                    <div class="absolute -top-12 -left-12 z-20">
+                        <img src="images/bjbeier.jpg" alt="BJ Beier"
+                            class="w-24 h-24 rounded-full border-4 border-brand-dark shadow-2xl object-cover transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                    </div>
+
+                    <!-- Terminal Window Mockup -->
+                    <div
+                        class="terminal-window rounded-lg bg-[#1e1e1e] border border-slate-700 overflow-hidden relative z-10 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                        <div class="flex items-center px-4 py-2 bg-[#2d2d2d] border-b border-slate-700">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="flex-1 text-center text-xs font-mono text-slate-400">bj@home-lab:~</div>
+                        </div>
+                        <div class="p-6 font-mono text-sm">
+                            <div class="mb-4">
+                                <span class="text-green-400">bj@home-lab:~$</span> neofetch
+                            </div>
+                            <div class="flex gap-4 text-slate-300">
+                                <div class="text-brand-accent hidden sm:block font-bold">
+                                    <!-- Custom Monitor ASCII Art -->
+                                    <pre class="leading-none text-[8px] sm:text-[10px] text-blue-400">
+.----------------.
+| [ / ]  [ X ]   |
+|                |
+|  bj@home-lab   |
+|----------------|
+'----------------'
+</pre>
+                                </div>
+                                <div class="pl-2">
+                                    <p><span class="text-brand-accent">Role:</span> Leader / Tinkerer</p>
+                                    <p><span class="text-brand-accent">Uptime:</span> 20+ Years</p>
+                                    <p><span class="text-brand-accent">Interests:</span> Family, Tech, Rock Music</p>
+                                    <p><span class="text-brand-accent">Status:</span> Geek Mode</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-400">bj@home-lab:~$</span> <span class="animate-pulse">_</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="stack" class="py-20 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">The Stack & Interests</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    From enterprise boardrooms to my personal home lab rack, these are the tools and technologies I
+                    interact with daily.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Stack Item 1 -->
+                <div class="glass-card p-6 rounded-xl hover:bg-slate-800 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <i data-lucide="server" class="w-8 h-8 text-blue-400"></i>
+                        <span class="text-xs font-mono text-slate-500 bg-slate-900 px-2 py-1 rounded">Infra</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Linux & Virtualization</h3>
+                    <p class="text-sm text-slate-400">Tinkering with Proxmox, Docker containers, and minimalist distros
+                        to test new ideas.</p>
+                </div>
+
+                <!-- Stack Item 2 -->
+                <div class="glass-card p-6 rounded-xl hover:bg-slate-800 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <i data-lucide="home" class="w-8 h-8 text-green-400"></i>
+                        <span class="text-xs font-mono text-slate-500 bg-slate-900 px-2 py-1 rounded">IoT</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Home Automation</h3>
+                    <p class="text-sm text-slate-400">Home Assistant setups that actually help (when I'm not breaking
+                        them). Practical dad-tech.</p>
+                </div>
+
+                <!-- Stack Item 3 -->
+                <div class="glass-card p-6 rounded-xl hover:bg-slate-800 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <i data-lucide="briefcase" class="w-8 h-8 text-purple-400"></i>
+                        <span class="text-xs font-mono text-slate-500 bg-slate-900 px-2 py-1 rounded">Work</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Leadership & Strategy</h3>
+                    <p class="text-sm text-slate-400">CIO at Guardian Savings Bank. Merging financial security with
+                        modern innovation.</p>
+                </div>
+
+                <!-- Stack Item 4 -->
+                <div class="glass-card p-6 rounded-xl hover:bg-slate-800 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <i data-lucide="smartphone" class="w-8 h-8 text-orange-400"></i>
+                        <span class="text-xs font-mono text-slate-500 bg-slate-900 px-2 py-1 rounded">Mobile</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Android Ecosystem</h3>
+                    <p class="text-sm text-slate-400">Open source advocate. Using Android since v1. Customizing flows to
+                        optimize life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects / Lab Section -->
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-4">Projects & Lab</h2>
+                    <p class="text-slate-400">Current experiments and past ventures.</p>
+                </div>
+                <!-- REMOVED: View GitHub Activity link -->
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="group relative rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 p-8 hover:border-brand-accent/50 transition-all duration-300 flex flex-col h-full">
+                    <div class="mb-6">
+                        <img src="images/circuit-board-large.png" alt="Home Lab Icon"
+                            class="w-20 h-20 rounded-xl shadow-lg border border-slate-600 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    <div class="flex-1 flex flex-col justify-end">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 text-xs font-bold text-slate-900 bg-green-400 rounded">ACTIVE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Home Lab Refactor</h3>
+                        <p class="text-slate-300 mb-4">Migrating legacy services to a Dockerized environment. Focusing
+                            on self-hosted alternatives for privacy.</p>
+                        <ul class="flex flex-wrap gap-3 text-slate-400 text-sm font-mono">
+                            <li>#Docker</li>
+                            <li>#Nginx</li>
+                            <li>#PiHole</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Status changed to ACTIVE) -->
+                <a href="https://bluedroidtech.com" target="_blank" rel="noopener noreferrer" class="block h-full">
+                    <div
+                        class="group relative rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 p-8 hover:border-brand-accent/50 transition-all duration-300 flex flex-col h-full">
+                        <div class="mb-6">
+                            <img src="images/bdt.png" alt="Blue Droid Technologies Icon"
+                                class="w-20 h-20 rounded-xl shadow-lg border border-slate-600 object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-end">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <span
+                                    class="px-2 py-1 text-xs font-bold text-slate-900 bg-green-400 rounded">ACTIVE</span>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">
+                                Blue Droid Technologies <i data-lucide="external-link" class="inline w-4 h-4 ml-1"></i>
+                            </h3>
+                            <p class="text-slate-300 mb-4">Small Business venture focused on making technology easy and
+                                accessible. "Support Made Simple".</p>
+                            <ul class="flex flex-wrap gap-3 text-slate-400 text-sm font-mono">
+                                <li>#Entrepreneurship</li>
+                                <li>#SMB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Network (Interesting Links) -->
+    <section id="network" class="py-20 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-8">The Network</h2>
+            <p class="text-slate-400 mb-8 max-w-2xl">Communities, groups, and resources I find valuable.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Network Item 1 (TabGeeks) - UPDATED DESCRIPTION -->
+                <a href="https://tabgeeks.com" target="_blank" rel="noopener noreferrer"
+                    class="glass-card p-6 rounded-lg hover:border-brand-accent/50 transition-all group">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <img src="images/tabgeeks.png" alt="TabGeeks"
+                                class="w-16 h-16 rounded-md object-contain bg-white/10 p-2">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-white group-hover:text-brand-accent">TABGeeks</h3>
+                            <!-- Removed line-clamp-2 class -->
+                            <p class="text-sm text-slate-400 mt-1 network-description">An independent network of shows
+                                and resources by IT Professionals, for IT Professionals.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Network Item 2 (TechnoTim) - ADDED -->
+                <a href="https://technotim.live" target="_blank" rel="noopener noreferrer"
+                    class="glass-card p-6 rounded-lg hover:border-brand-accent/50 transition-all group">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <!-- Image path updated to images/technotim.jpg as requested -->
+                            <img src="images/technotim.jpg"
+                                onerror="this.onerror=null; this.src='https://placehold.co/64x64/1e293b/94a3b8?text=TT';"
+                                alt="TechnoTim" class="w-16 h-16 rounded-md object-cover bg-white/10 p-0">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-white group-hover:text-brand-accent">TechnoTim</h3>
+                            <!-- Removed line-clamp-2 class -->
+                            <p class="text-sm text-slate-400 mt-1 network-description">A community and resource hub
+                                focused on self-hosting, server management, and home lab setups. Excellent tutorials for
+                                Docker, Proxmox, and more.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Network Item 3 (Placeholder for future items) -->
+                <div
+                    class="border border-dashed border-slate-700 rounded-lg p-6 flex flex-col items-center justify-center text-center opacity-50 min-h-[100px]">
+                    <i data-lucide="plus" class="w-8 h-8 text-slate-600 mb-2"></i>
+                    <span class="text-sm text-slate-500">More coming soon...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Thoughts Preview -->
+
+    <section id="thoughts-preview" class="py-20 border-y border-white/5 bg-slate-800/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Digital Insights</h2>
+            <p class="text-slate-400 mb-8">Thoughts on leadership, technology, and tinkering.</p>
+            <a href="BJB-blog.html"
+                class="inline-flex items-center justify-center px-8 py-4 border border-brand-accent text-base font-medium rounded-lg text-brand-accent hover:bg-brand-accent hover:text-white transition-all">
+                Read the Blog
+                <i data-lucide="book-open" class="ml-2 h-5 w-5"></i>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="font-mono text-xl font-bold text-white tracking-tighter">
+                        <span class="text-brand-accent">&lt;</span>BJ.Beier<span class="text-brand-accent">/&gt;</span>
+                    </a>
+                    <p class="text-slate-500 text-sm mt-2">Problem Solver. Leader. Knowledge Seeker.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://linkedin.com/in/bjbeier" class="text-slate-400 hover:text-white transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="https://x.com/bjbeier" class="text-slate-400 hover:text-white transition-colors"
+                        title="X (Formerly Twitter)">
+                        <span class="sr-only">X (Twitter)</span>
+                        <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor">
+                            <path
+                                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                        </svg>
+                    </a>
+                    <!-- REMOVED: GitHub link from footer -->
+                    <a href="mailto:contact@bjbeier.com" class="text-slate-400 hover:text-white transition-colors">
+                        <span class="sr-only">Email</span>
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
+                <p>&copy; 2025 BJ Beier. All rights reserved.</p>
+                <!-- Dad Joke Container -->
+                <div class="mt-4 md:mt-0 font-mono text-xs flex items-center">
+                    <span class="text-brand-terminal mr-2">➜</span>
+                    <span id="dad-joke" class="italic">Loading tech humor...</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-393461309"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-393461309');
+    </script>
+</body>
+
+</html>
