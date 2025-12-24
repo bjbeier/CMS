@@ -6,7 +6,7 @@
  */
 
 const CMS_CONFIG = {
-    postsUrl: 'posts.json' // Path to posts.json relative to the usage, or absolute
+    postsUrl: 'https://raw.githubusercontent.com/bjbeier/CMS/main/posts.json'
 };
 
 /**
@@ -14,7 +14,9 @@ const CMS_CONFIG = {
  */
 async function fetchBlogPosts() {
     try {
-        const response = await fetch(CMS_CONFIG.postsUrl);
+        // Add cache-busting timestamp
+        const urlWithCache = `${CMS_CONFIG.postsUrl}?t=${new Date().getTime()}`;
+        const response = await fetch(urlWithCache);
         if (!response.ok) throw new Error('Failed to load posts');
         return await response.json();
     } catch (error) {
