@@ -33,7 +33,7 @@ const Icons = {
  */
 function init() {
     loadConfig();
-    
+
     if (!config.token || !config.repo) {
         showSettings();
     } else {
@@ -45,7 +45,7 @@ function init() {
     document.getElementById('btn-settings').addEventListener('click', showSettings);
     document.getElementById('btn-close-editor').addEventListener('click', closeEditor);
     document.getElementById('btn-close-settings').addEventListener('click', closeSettings);
-    
+
     postForm.addEventListener('submit', handlePostSave);
     settingsForm.addEventListener('submit', handleSettingsSave);
 }
@@ -67,10 +67,10 @@ function loadConfig() {
 
 function handleSettingsSave(e) {
     e.preventDefault();
-    config.owner = document.getElementById('setting-owner').value;
-    config.repo = document.getElementById('setting-repo').value;
-    config.branch = document.getElementById('setting-branch').value;
-    config.token = document.getElementById('setting-token').value;
+    config.owner = document.getElementById('setting-owner').value.trim();
+    config.repo = document.getElementById('setting-repo').value.trim();
+    config.branch = document.getElementById('setting-branch').value.trim();
+    config.token = document.getElementById('setting-token').value.trim();
 
     localStorage.setItem('cms_config', JSON.stringify(config));
     closeSettings();
@@ -88,7 +88,7 @@ async function fetchPosts() {
     try {
         const path = 'posts.json'; // Can be configurable if needed
         const url = `${GITHUB_API_BASE}/repos/${config.owner}/${config.repo}/contents/${path}?ref=${config.branch}`;
-        
+
         const response = await fetch(url, {
             headers: {
                 'Authorization': `token ${config.token}`,
@@ -110,16 +110,18 @@ async function fetchPosts() {
 
         const data = await response.json();
         currentSha = data.sha;
-        
+
         // Content is base64 encoded
-        const content = atob(data.content);
+        // GitHub API may add newlines to base64 string, which breaks atob in browser
+        const cleanContent = data.content.replace(/\n/g, '');
+        const content = atob(cleanContent);
         // Decode unicode characters properly
         const jsonStr = decodeURIComponent(escape(content));
         posts = JSON.parse(jsonStr);
-        
+
         renderPosts();
         showToast('Posts loaded successfully!', 'success');
-        
+
     } catch (error) {
         console.error(error);
         postListEl.innerHTML = `<div style="text-align:center; color:var(--danger-color);">Error loading posts: ${error.message}</div>`;
@@ -129,15 +131,15 @@ async function fetchPosts() {
 
 async function savePostsToGitHub() {
     showToast('Syncing to GitHub...', 'info');
-    
+
     try {
         const path = 'posts.json';
         const url = `${GITHUB_API_BASE}/repos/${config.owner}/${config.repo}/contents/${path}`;
-        
+
         // Encode content
         const jsonStr = JSON.stringify(posts, null, 2);
         const contentEncoded = btoa(unescape(encodeURIComponent(jsonStr)));
-        
+
         const body = {
             message: `Update posts [CMS]`,
             content: contentEncoded,
@@ -158,13 +160,14 @@ async function savePostsToGitHub() {
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to save: ${response.statusText}`);
+            const errData = await response.json();
+            throw new Error(`Failed to save: ${errData.message || response.statusText}`);
         }
 
         const data = await response.json();
         currentSha = data.content.sha;
         showToast('Changes saved to GitHub!', 'success');
-        
+
     } catch (error) {
         console.error(error);
         showToast(`Error saving: ${error.message}`, 'error');
@@ -176,7 +179,7 @@ async function savePostsToGitHub() {
  */
 function renderPosts() {
     postListEl.innerHTML = '';
-    
+
     if (posts.length === 0) {
         postListEl.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:var(--text-secondary);">No posts found. Create one!</div>';
         return;
@@ -213,7 +216,7 @@ function renderPosts() {
 function openEditor(postId = null) {
     const form = document.getElementById('post-form');
     form.reset();
-    
+
     if (postId) {
         const post = posts.find(p => p.id === postId);
         if (post) {
@@ -232,13 +235,13 @@ function openEditor(postId = null) {
         document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
         document.getElementById('modal-title').innerText = 'New Post';
     }
-    
+
     editorModal.classList.add('open');
 }
 
 function handlePostSave(e) {
     e.preventDefault();
-    
+
     const id = document.getElementById('post-id').value;
     const newPost = {
         id: id,
@@ -266,11 +269,11 @@ function handlePostSave(e) {
 /**
  * Actions
  */
-window.editPost = function(id) {
+window.editPost = function (id) {
     openEditor(id);
 };
 
-window.deletePost = function(id) {
+window.deletePost = function (id) {
     if (confirm('Are you sure you want to delete this post?')) {
         posts = posts.filter(p => p.id !== id);
         renderPosts();
@@ -295,7 +298,7 @@ function closeSettings() {
 function showToast(msg, type = 'info') {
     statusMsg.innerText = msg;
     statusEl.classList.add('show');
-    
+
     // Auto hide after 3s
     setTimeout(() => {
         statusEl.classList.remove('show');
