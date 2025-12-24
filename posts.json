@@ -51,5 +51,18 @@
       "test",
       "tech"
     ]
+  },
+  {
+    "id": "d9b5733f-a43a-4e77-8968-9e6a6e50a3ce",
+    "title": "Another post",
+    "slug": "another-post",
+    "date": "2025-12-24",
+    "image": "",
+    "summary": "Here is another post",
+    "content": "more, more, more",
+    "tags": [
+      "tech",
+      "stuff"
+    ]
   }
 ]
