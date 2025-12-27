@@ -224,7 +224,6 @@ function openEditor(postId = null) {
             document.getElementById('post-title').value = post.title;
             document.getElementById('post-slug').value = post.slug;
             document.getElementById('post-date').value = post.date;
-            document.getElementById('post-image').value = post.image || '';
             document.getElementById('post-summary').value = post.summary || '';
             document.getElementById('post-content').value = post.content || '';
             document.getElementById('post-tags').value = (post.tags || []).join(', ');
@@ -248,7 +247,6 @@ function handlePostSave(e) {
         title: document.getElementById('post-title').value,
         slug: document.getElementById('post-slug').value,
         date: document.getElementById('post-date').value,
-        image: document.getElementById('post-image').value,
         summary: document.getElementById('post-summary').value,
         content: document.getElementById('post-content').value,
         tags: document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(t => t)
